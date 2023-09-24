@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+
 import './App.css';
 
+import Members from './Components/Members';
+
+var dummy = [
+  { id: 1,
+    name: "ashok",
+    age: 22
+  },
+  {id: 2,
+    name: "broom",
+    age: 22
+  },
+  {id: 3,
+    name: "ccshok",
+    age: 22
+  }
+
+]
+
 function App() {
+  const [members, setMembers] = useState(dummy);
+
+  function newMemberAddedHandler(memberObj){
+    setMembers(prev=>{
+      return[
+        memberObj,
+        ...prev
+      ]
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Members members={members} onNewMemberAdded = {newMemberAddedHandler}/>
     </div>
   );
 }
