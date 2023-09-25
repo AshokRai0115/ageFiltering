@@ -7,15 +7,15 @@ import Members from './Components/Members';
 var dummy = [
   { id: 1,
     name: "ashok",
-    age: 22
+    age: 2
   },
   {id: 2,
     name: "broom",
-    age: 22
+    age: 3
   },
   {id: 3,
     name: "ccshok",
-    age: 22
+    age: 4
   }
 
 ]
@@ -33,7 +33,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App"> 
       <Members members={members} onNewMemberAdded = {newMemberAddedHandler}/>
     </div>
   );

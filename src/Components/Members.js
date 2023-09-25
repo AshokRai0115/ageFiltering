@@ -23,27 +23,30 @@ function Members(props) {
         return props.onNewMemberAdded(info);
 
     }
-    function returnAgeFilterHandler(filterAge) {
-        console.log(filterAge)
-        props.members.map(m => {
-            if (m.age == filterAge) {
-                setFilteredMembers(prev => {
-                    return [m,
-                        ...prev]
-                })
-            }
-        })
+    function returnAgeFilterHandler(age) {
+        let ageGroup = props.members.filter(m=> Number(m.age) === Number(age))
+        setFilteredMembers(ageGroup)
     }
     return (
         <div>
             <NewMember onInfoSubmit={submittedInfo} />
-            <FilterAge onAgeToFilter={returnAgeFilterHandler}></FilterAge>
+            <FilterAge onAgeToFilter={returnAgeFilterHandler} members = {props.members}></FilterAge>
 
             {
-                filteredMembers.map(m => {
-                    console.log(m.id)
-                    return <Member key={m.id} name={m.name} age={m.age} />
-                })
+                filteredMembers.length > 0 ?
+                    (
+                        filteredMembers.map(m => {
+                            console.log("Inside fitered")
+                            return <Member key={m.id} name={m.name} age={m.age} />
+                        })
+
+                    ) :
+                    (
+                        props.members.map(m => {
+                            return <Member key={m.id} name={m.name} age={m.age} />
+                        })
+                    )
+
             }
 
 
